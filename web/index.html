@@ -61,7 +61,7 @@
                 console.log('event');
                 $.post(
                     'http://localhost:8000/add', 
-                    JSON.stringify($('#json-data').val())
+                    $('#json-data').val()
                 ).done(function( data ) {
                     console.log(data);
                 });;
