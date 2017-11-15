@@ -24,7 +24,7 @@ services:
       KAFKA_ADVERTISED_LISTENERS: PLAINTEXT://localhost:29092
       KAFKA_OFFSETS_TOPIC_REPLICATION_FACTOR: 1
     volumes:
-      - ./data/kakfa-data:/var/lib/kafka/data
+      - ./data/kafka-data:/var/lib/kafka/data
     extra_hosts:
       - "moby:127.0.0.1"
       - "default:127.0.0.1"
