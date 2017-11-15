@@ -16,5 +16,7 @@ docs/_api/
 build/*
 .DS_Store
 *.log
-data/*
+data/kafka-data/*
+data/zk-txn-logs/*
+data/zk-data/*
 .cache
