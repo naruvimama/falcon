@@ -12,21 +12,24 @@
             <div class='col-sm-6'>
                 <h4>Add JSON data</h4>
                 <form id='json-data-form' method='post'>
-                    <div class='form-group'
+                    <div class='form-group'>
                         <label for='json-data'>JSON data</label>
                         <textarea class="form-control" id="json-data" rows="10"></textarea>
                     </div>
                     <button type="submit" class="btn btn-primary">Submit</button>
                 </form>
+
+                <div class="card clearfix invisible" id="add-details" style="width: 20rem;">
+                    <h4 class="card-title">Added enrty info</h4>
+                    <p class="card-text" id="offset-in-card"></p>
+                    <p class="card-text" id="topic-in-card"></p>
+                    <p class="card-text" id="partition-in-card"></p>
+                </div>
+
             </div>
             <div class='col-sm-6'>
                 <h4>JSON stream</h4>
-                <ul class="list-group">
-                    <li class="list-group-item">Cras justo odio</li>
-                    <li class="list-group-item">Dapibus ac facilisis in</li>
-                    <li class="list-group-item">Morbi leo risus</li>
-                    <li class="list-group-item">Porta ac consectetur ac</li>
-                    <li class="list-group-item">Vestibulum at eros</li>
+                <ul class="list-group" id="ws_msgs">
                 </ul>
             </div>
         </div>
@@ -43,8 +46,7 @@
     <script type="text/javascript">
 
         function add_content_to_feed(content) {
-            console.log(content);
-            document.x_data = content;
+            $("#ws_msgs").append('<li class="list-group-item">' + content + '</li>')
         }
 
         function ws_token() {
@@ -56,14 +58,16 @@
         }
 
         function attach_event_handlers() {
-            console.log('event handlers attached');
             $("#json-data-form").submit(function( event ) {
-                console.log('event');
                 $.post(
                     'http://localhost:8000/add', 
                     $('#json-data').val()
                 ).done(function( data ) {
                     console.log(data);
+                    $("#offset-in-card").text('Offset : ' + data.offset);
+                    $("#topic-in-card").text('Topic : ' + data.topic);
+                    $("#partition-in-card").text('Partition : ' + data.partition);
+                    $("#add-details").removeClass('invisible').addClass('visible');
                 });;
                 event.preventDefault();
             });
@@ -73,7 +77,6 @@
             ws = new WebSocket('ws://' + document.domain + ':' + location.port + '/feed');
 
             ws.onmessage = function (event) {
-                console.log(event);
                 add_content_to_feed(event.data);
             }
         }
