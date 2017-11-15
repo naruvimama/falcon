@@ -18,4 +18,4 @@ A seperate database wouldn't be necessary.
 
 To fetch all the items
 
-[http://localhost:8000/get_all?offset=0&limit=1]
+http://localhost:8000/get_all?offset=0&limit=1
