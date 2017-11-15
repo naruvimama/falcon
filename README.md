@@ -14,3 +14,8 @@ and can potentially pick up from where they left. Rewind by offset or timestamp 
 
 Since Kafka is persistant all the json objects stored can be fetched by seeking to the start.
 A seperate database wouldn't be necessary.
+
+
+To fetch all the items
+
+[http://localhost:8000/get_all?offset=0&limit=1]
